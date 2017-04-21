@@ -1,0 +1,279 @@
+List all the shell scripts contents of the directory
+File name : array_example1.sh
+array_example2.sh
+array.sh
+cmdlinevar.sh
+comments.sh
+datescript.sh
+dayofweek.sh
+environment.sh
+errors.sh
+expressions.sh
+firstscript.sh
+forsample.sh
+ifexpr.sh
+ifthenelse.sh
+installinghttpd.sh
+readsample.sh
+secondscript.sh
+simpleif.sh
+substitution.sh
+testfile.sh
+test.sh
+var-examples.sh - contents #!/bin/bash
+#Another Practising example of Array
+
+
+ARRAY1=("ONE" "TWO" "THREE" "FOUR")
+COUNT=0
+
+for INDEX in ${ARRAY1[@]}; do
+  echo "Currently processing the token number: ${ARRAY1[COUNT]}"
+  COUNT="`expr $COUNT + 1`"
+done
+#!/bin/bash
+# Another Practice example of array
+
+ARRAY2=("FIRST" "SECOND" "THREE")
+COUNT=0
+
+for INDEX in ${ARRAY2[@]}; do 
+  #echo "${ARRAY2[COUNT]} customer is in process"
+  echo "Processing the customer : ${ARRAY2[COUNT]}"
+  COUNT="`expr $COUNT + 1`"
+done
+#!/bin/bash
+# This is an simple example of array
+
+SERVERLIST=("controlserver" "webserver" "appserver")
+COUNT=0
+
+for INDEX in ${SERVERLIST[@]}; do 
+  echo "Processing Server: ${SERVERLIST[COUNT]}"
+  COUNT="`expr $COUNT + 1`"
+done 
+#!/bin/bash
+# Demo of command line variables passed in with our shell script
+
+clear
+USERNAME=$1
+PASSWORD=$2
+echo "The following Username is $USERNAME and Password is $PASSWORD"
+
+
+
+#!/bin/bash
+# This line is intended to be use as a general description of the script and anything as it does
+
+clear   # Clears the screen
+
+#MYUSERNAME="Kalyan"  #The user name of the application
+#MYUSERNAME="Krishna" #Changed the username from kalyan to krishna
+MYUSERNAME="SHIVANAND"  #changed the user from krishna to shianand
+
+echo "The default user is : $MYUSERNAME" #Display to the console about username
+
+DATETIMESTAMP=`date`
+
+echo "This is when the script ran: $DATETIMESTAMP" #This si the time stampof the script execution
+
+
+
+#! /bin/bash
+
+Date=`date`
+Uptime=`uptime`
+echo " current date: $Date"
+echo "System uptime: $Uptime"
+#! /bin/bash
+
+day="$(date +'%A')"
+echo "Today is $day"
+#!/bin/bash
+
+clear
+
+echo "This script will give us environment information"
+echo "================================================"
+echo ""
+echo "Hello username: $USER"
+echo ""
+echo "The path defined in env: $PATH"
+echo ""
+echo "Your home directory is $HOME"
+echo ""
+#!/bin/bash
+
+# This is to show the exit status types
+
+set -e  ## This will exits the shell immediately after encountering any error
+
+expr 1 + 5
+echo $?
+
+ls -lart
+echo $?
+
+ansible all -m ping
+echo $?
+
+rm kalyan.sh
+echo $?
+
+expr 356 + 44
+echo $?
+
+
+
+#!/bin/bash
+# Expression evaluation
+
+clear
+
+expr 10 + 10 
+
+expr 100 / 5
+
+expr 50 - 30
+
+expr \( 2 + 2 \) \* 5
+#! /bin/bash
+
+echo "Welcome to DEVOPS WORLD"
+YOUR_NAME="KALYAN"
+echo "The Variable YOUR_NAME is $YOUR_NAME"
+
+#DATE='date'
+date '+date:%m-%n%nTIME:%H:%M'
+echo "Today date is $DATE"
+
+SYSTEM_UPTIME='uptime'
+echo "The system uptime is $SYSTEM_UPTIME"
+#!/bin/bash
+# This is a simple demo for for loop
+
+echo "List all the shell scripts contents of the directory"
+
+SHELLSCRIPTS=`ls *.sh`
+
+for SCRIPT in "$SHELLSCRIPTS"; do
+  DISPLAY="`cat $SCRIPT`"
+  echo "File name : $SCRIPT - contents $DISPLAY"
+done
+
+#!/bin/bash
+## Testing Multiple expressions in a single statement
+
+FILENAME=$1
+
+echo "Checking an existence of $FILENAME and readability"
+
+if [ -f $FILENAME ] && [ -r $FILENAME ]
+  then 
+   echo " The file $FILENAME exists and it is an readble file"
+fi
+#!/bin/bash
+# Simple example of if then else and nested if statement
+
+echo "Enter a number between 1 and 3:"
+read VALUE
+
+if [ "$VALUE" -eq "1" ] 2>/dev/null ; then
+  echo "You have entered #1"
+elif [ "$VALUE" -eq "2" ] 2>/dev/null ; then
+  echo " You have successfully entered #2"
+elif [ "$VALUE" -eq "3" ] 2>/dev/null ; then
+  echo "You have entered number 3"
+else
+  echo " You haven't follwed the instructions properly"
+fi
+
+#! /bin/bash
+
+package=`yum install -y httpd`
+echo "Installing package httpd $package"
+#!/bin/bash
+# Interactive Script for user input
+
+echo "Enter yoour First Name"
+read FIRSTNAME
+
+echo "Hello My name is $FIRSTNAME"
+
+echo "Enter your last name"
+read LASTNAME
+
+echo ""
+echo "Your Fullname is $FIRSTNAME $LASTNAME"
+echo ""
+echo "Enter your age"
+read USERAGE
+
+echo "In ten years your age will be `expr $USERAGE + 10` years"
+#! /bin/bash
+
+echo -n "PLEASE ENTER YOUR FIRST NAME and LAST NAME: "
+read firstname lastname
+echo "Hello, my name is $firstname. and my family name is $lastname"
+#!/bin/bash
+
+echo " GUESS THE SECRET NUMBER"
+echo " ===== === ====== ======"
+echo ""
+echo " Enter any number you guess between 1 and 5: "
+read GUESS
+
+if [ $GUESS -eq 3 ]
+  then
+   echo "you Guessed the Correct Number!"
+fi
+#!/bin/bash
+# This script is used to show how to do simple substitution
+# This script is intended to show how we can use a command substituted into a variable
+
+shopt -s expand_aliases ## This is will turn on shell scripting adding for expanding aliases within the sub shell
+
+#alias TODAY='date'
+#alias UFILES='find /home -user ansible'
+
+TODAYSDATE=`date`
+USERFILES=`find /home -user ansible`
+
+echo "Today's date is $TODAYSDATE"
+echo "The files listed in the home directory of ansible user is $USERFILES"
+
+#A=`TODAY`
+#B=`UFILES`
+
+#echo "With alias, TODAY is $A"
+#echo "With Alias UFILES is $B"
+#!/bin/bash
+# Tests an existence of an indicated file name
+
+FILENAME=$1
+echo "Testing for the Existence of a File called $FILENAME"
+
+if [ -a $FILENAME ]  ##Incase if you want to give the expression for not equal the it will be [ ! -a $FILENAME]
+  then 
+   echo "File $FILENAME Does Indeed exists!"
+fi
+#!/bin/bash
+
+clear
+
+echo "hello world"
+#!/bin/bash
+
+MYUSERNAME="username"
+MYPASSWORD="password123"
+STARTOFSCRIPT=`date`
+
+echo "MY Login Name for this application is : $MYUSERNAME"
+echo " "
+echo "My Login Password for this application is : $MYPASSWORD"
+echo " "
+echo "I Started this script is: $STARTOFSCRIPT"
+
+ENDOFSCRIPT=`date`
+
+echo "I ended this script is: $ENDOFSCRIPT"
